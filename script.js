@@ -1,16 +1,22 @@
-let products = JSON.parse(localStorage.getItem("products")) || [];
+// LOAD PRODUCTS
+let products = JSON.parse(localStorage.getItem("products"));
 
-const ADMIN_USERNAME = "simba";
-const ADMIN_PASSWORD = "kalkamaa";
+if (!products || products.length === 0) {
+    products = [
+        {
+            name: "Floral Kurti",
+            image: "https://images.unsplash.com/photo-1521335629791-ce4aec67dd47",
+            link: "https://www.meesho.com/"
+        },
+        {
+            name: "Casual Dress",
+            image: "https://images.unsplash.com/photo-1542060748-10c28b62716f",
+            link: "https://www.flipkart.com/"
+        }
+    ];
 
-const adminSection = document.getElementById("admin");
-
-// SHOW ADMIN ONLY IF LOGGED IN
-if (localStorage.getItem("adminLoggedIn") === "true") {
-    adminSection.classList.remove("hidden");
-    showAdminPanel();
+    localStorage.setItem("products", JSON.stringify(products));
 }
-
 function login() {
     const user = document.getElementById("adminUser").value;
     const pass = document.getElementById("adminPass").value;
@@ -83,3 +89,4 @@ function addProduct() {
 }
 
 displayProducts();
+
